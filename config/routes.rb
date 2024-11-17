@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   # auth
   post "login" => "sessions#login"
 
+  # conversations
+  get "conversations" => "conversations#show"
+  post "conversations" => "conversations#create"
+  post "conversations/:conversation_uuid/messages" => "messages#create"
+  get "conversations/:conversation_uuid/messages" => "messages#show"
+
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
