@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # users
   post "user" => "users#create"
   get "user" => "users#show"
+  get "user/list" => "users#list"
 
   # auth
   post "login" => "sessions#login"

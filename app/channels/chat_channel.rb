@@ -1,9 +1,9 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    # PEGAR USERNAME DO DESTINATÁRIO
-    # BUSCAR NA TABELA DE CONVERSAS E PEGAR O ID DA CONVERSA
-    # stream_from "chat_channel_#{conversation_id}"
-    stream_from ""
+    conversation = current_user.conversations.find_by(conversation_uuid: params[:conversation_uuid])
+    if conversation
+      stream_from "Chat_#{params[:conversation_uuid]}"
+    end
   end
 
   def unsubscribed

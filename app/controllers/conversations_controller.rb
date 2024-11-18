@@ -16,6 +16,7 @@ class ConversationsController < ApplicationController
     participants.each do |participant|
       user = User.find_by(username: participant)
       if user and user.id != current_user.id
+        ActionCable.server.broadcast("Activities_#{user.username}", { action: "new_chat", body: "A new chat has been created." })
         conversation.conversation_participants.create(user_id: user.id)
       end
     end

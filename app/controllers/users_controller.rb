@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     render json: { user: { username: user.username, email: user.email } }, status: :ok
   end
 
+  def list
+    render json: { usernames: User.pluck(:username) }, status: :ok
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :password, :username)
