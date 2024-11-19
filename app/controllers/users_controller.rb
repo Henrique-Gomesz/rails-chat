@@ -20,7 +20,10 @@ class UsersController < ApplicationController
   end
 
   def list
-    render json: { usernames: User.pluck(:username) }, status: :ok
+    current_username = current_user.username
+    usernames = User.where.not(username: current_username).pluck(:username)
+
+    render json: { usernames: usernames }, status: :ok
   end
 
   private
