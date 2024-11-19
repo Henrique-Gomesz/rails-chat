@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
 
   def show
     conversations = current_user.conversations
-    render json: conversations, include: { conversation_participants: { include: { user: { only: :username } }, only: :user } }
+    render json: conversations, include: { conversation_participants: { include: { user: { only: :username } }, only: :user }, messages: { include: { user: { only: :username } },  only: [:message,:created_at] } }
   end
 
   def create
