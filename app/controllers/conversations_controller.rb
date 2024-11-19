@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
 
   def show
     conversations = current_user.conversations
-    render json: conversations
+    render json: conversations, include: { conversation_participants: { include: { user: { only: :username } }, only: :user } }
   end
 
   def create
@@ -22,7 +22,7 @@ class ConversationsController < ApplicationController
     end
 
     if conversation.save
-      render json: conversation
+      render json: conversation, include: { conversation_participants: { include: { user: { only: :username } }, only: :user } }
     else
       render json: { error: conversation.errors.full_messages }, status: :bad_request
     end

@@ -12,7 +12,12 @@ module RailsChat
     config.load_defaults 8.0
     config.action_cable.disable_request_forgery_protection = true
 
-
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

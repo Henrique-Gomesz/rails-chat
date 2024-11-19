@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorization_middleware, only: [ :show ]
+  before_action :authorization_middleware, only: [ :show, :list ]
 
   def create
     user = User.new(user_params)
