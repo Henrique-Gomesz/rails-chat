@@ -12,10 +12,10 @@ module RailsChat
     config.load_defaults 8.0
     config.action_cable.disable_request_forgery_protection = true
 
-    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        origins '*' # Ou especifique a origem, ex: 'http://localhost:3000'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
       end
     end
     # Please, add to the `ignore` list any other `lib` subdirectories that do
